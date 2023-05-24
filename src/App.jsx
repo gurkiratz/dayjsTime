@@ -4,7 +4,8 @@ import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import utc from 'dayjs/plugin/utc'
 import tz from 'dayjs/plugin/timezone'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { FaEdit } from 'react-icons/fa'
 
 dayjs.extend(localizedFormat)
 dayjs.extend(utc)
@@ -15,10 +16,19 @@ Modal.setAppElement('#root')
 function App() {
   const [timezone, setTimezone] = useState(dayjs.tz.guess())
   const [myTz, setMyTz] = useState(dayjs.tz.guess())
-  const [time, setTime] = useState(dayjs().format('HH:mm:ss'))
-  const [date, setDate] = useState(dayjs().format('dddd, D MMM, YYYY'))
+  const [time, setTime] = useState(dayjs().tz(timezone).format('HH:mm:ss'))
+  const [date, setDate] = useState(
+    dayjs().tz(timezone).format('dddd, D MMM, YYYY')
+  )
   const [modal, showModal] = useState(false)
   const timezones = Intl.supportedValuesOf('timeZone')
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(dayjs().tz(timezone).format('HH:mm:ss'))
+    }, 1000)
+    return () => clearInterval(interval)
+  }, [timezone])
 
   const customStyles = {
     overlay: {
@@ -66,12 +76,30 @@ function App() {
   }
 
   return (
-    <>
-      <p>{timezone}</p>
+    <div style={{ textAlign: 'right' }}>
+      <p
+        style={{
+          letterSpacing: '2px',
+          display: 'inline-block',
+          opacity: '0.6',
+        }}
+      >
+        {timezone}
+      </p>
+      <button
+        onClick={openModal}
+        style={{
+          background: 'transparent',
+          color: '#fff',
+          display: 'inline-block',
+          opacity: '0.6',
+        }}
+      >
+        <FaEdit />
+      </button>
 
-      <h1>{time}</h1>
+      <h1 style={{ fontSize: '7rem', padding: '0px' }}>{time}</h1>
       <p>{date}</p>
-      <button onClick={openModal}>Open Modal</button>
 
       <Modal
         isOpen={modal}
@@ -121,7 +149,7 @@ function App() {
           Close
         </button>
       </Modal>
-    </>
+    </div>
   )
 }
 
