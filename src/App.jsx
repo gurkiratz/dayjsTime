@@ -30,6 +30,10 @@ function App() {
     return () => clearInterval(interval)
   }, [timezone])
 
+  useEffect(() => {
+    document.title = timezone
+  }, [timezone])
+
   const customStyles = {
     overlay: {
       position: 'fixed',
