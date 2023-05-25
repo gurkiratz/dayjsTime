@@ -32,6 +32,8 @@ function App() {
 
   useEffect(() => {
     document.title = timezone
+    const currentDate = dayjs().tz(timezone).format("dddd, D MMM, YYYY");
+    setDate(currentDate);
   }, [timezone])
 
   const customStyles = {
