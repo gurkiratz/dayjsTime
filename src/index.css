@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Passion+One:wght@400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@700&family=Shantell+Sans:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap');
 :root {
   font-family: 'Shantell Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -25,13 +25,13 @@ a:hover {
   color: #535bf2;
 }
 
-body {
+/* body {
   margin: 0;
   display: flex;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-}
+} */
 
 h1 {
   font-size: 3.2em;

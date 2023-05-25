@@ -1,11 +1,11 @@
-import './App.css'
+// import './App.css'
 import Modal from 'react-modal'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import utc from 'dayjs/plugin/utc'
 import tz from 'dayjs/plugin/timezone'
 import { useState, useEffect } from 'react'
-import { FaEdit } from 'react-icons/fa'
+import { FaEdit, FaWindowClose } from 'react-icons/fa'
 
 dayjs.extend(localizedFormat)
 dayjs.extend(utc)
@@ -80,79 +80,63 @@ function App() {
   }
 
   return (
-    <div style={{ textAlign: 'right' }}>
-      <p
-        style={{
-          letterSpacing: '2px',
-          display: 'inline-block',
-          opacity: '0.6',
-        }}
-      >
-        {timezone}
-      </p>
-      <button
-        onClick={openModal}
-        style={{
-          background: 'transparent',
-          color: '#fff',
-          display: 'inline-block',
-          opacity: '0.6',
-        }}
-      >
-        <FaEdit />
-      </button>
-
-      <h1 style={{ fontSize: '7rem', padding: '0px' }}>{time}</h1>
-      <p>{date}</p>
-
-      <Modal
-        isOpen={modal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Timezone Modal"
-      >
-        <h2>Change Timezone</h2>
-        <select
-          onChange={handleTimezoneChange}
-          value={myTz}
-          style={{
-            padding: '8px',
-            background: 'transparent',
-            borderRadius: '6px',
-            marginRight: '10px',
-          }}
-        >
-          {timezones.map((tz) => (
-            <option
-              key={tz}
-              value={tz}
-              style={{
-                backgroundColor: '#222',
-                color: '#fff',
-              }}
-            >
-              {tz}
-            </option>
-          ))}
-          ``
-        </select>
+    <div className="flex justify-center items-center min-h-screen">
+      <div className="-translate-x-2 px-4 text-right">
+        <p className="tracking-widest inline-block opacity-[0.6] text-right">
+          {timezone}
+        </p>
         <button
-          style={{
-            background: 'transparent',
-          }}
-          onClick={handleApply}
+          onClick={openModal}
+          className="bg-transparent text-white inline-block opacity-[0.6] p-2 ml-2"
         >
-          Apply
+          <FaEdit />
         </button>
-        <button
-          style={{
-            background: 'transparent',
-          }}
-          onClick={closeModal}
+
+        <p className="flex justify-center my-4 -mr-2">
+          <span
+            style={{ fontFamily: 'Courier Prime' }}
+            className="text-6xl md:text-9xl font-bold text-center"
+          >
+            {time}
+          </span>
+        </p>
+        <p>{date}</p>
+
+        <Modal
+          isOpen={modal}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Timezone Modal"
         >
-          Close
-        </button>
-      </Modal>
+          <h2 className="opacity-60">Change Timezone</h2>
+          <select
+            onChange={handleTimezoneChange}
+            value={myTz}
+            className="px-4 py-2 bg-transparent w-40 rounded-md mr-3 hover:border hover:border-[#646cff] focus:border-[#646cff]"
+          >
+            {timezones.map((tz) => (
+              <option
+                key={tz}
+                value={tz}
+                style={{
+                  backgroundColor: '#222',
+                  color: '#fff',
+                }}
+              >
+                {tz}
+              </option>
+            ))}
+            ``
+          </select>
+          <button className="bg-transparent" onClick={handleApply}>
+            Apply
+          </button>
+          <FaWindowClose
+            className="bg-transparent p-0 cursor-pointer fixed top-6 right-6"
+            onClick={closeModal}
+          />
+        </Modal>
+      </div>
     </div>
   )
 }
