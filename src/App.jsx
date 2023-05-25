@@ -24,16 +24,14 @@ function App() {
   const timezones = Intl.supportedValuesOf('timeZone')
 
   useEffect(() => {
+    document.title = timezone
+    setDate(dayjs().tz(timezone).format("dddd, D MMM, YYYY"))
     const interval = setInterval(() => {
       setTime(dayjs().tz(timezone).format('HH:mm:ss'))
     }, 1000)
     return () => clearInterval(interval)
   }, [timezone])
-
-  useEffect(() => {
-    document.title = timezone
-  }, [timezone])
-
+  
   const customStyles = {
     overlay: {
       position: 'fixed',
