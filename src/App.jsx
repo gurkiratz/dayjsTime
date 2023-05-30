@@ -1,141 +1,43 @@
-// import './App.css'
-import Modal from 'react-modal'
 import dayjs from 'dayjs'
 import localizedFormat from 'dayjs/plugin/localizedFormat'
 import utc from 'dayjs/plugin/utc'
 import tz from 'dayjs/plugin/timezone'
-import { useState, useEffect } from 'react'
-import { FaEdit, FaWindowClose } from 'react-icons/fa'
-
+import { useState } from 'react'
+import City from './components/City'
+import CityModal from './components/Modal'
 dayjs.extend(localizedFormat)
 dayjs.extend(utc)
 dayjs.extend(tz)
 
-Modal.setAppElement('#root')
+const curCity = dayjs.tz.guess()
+const data = [curCity]
 
 function App() {
-  const [timezone, setTimezone] = useState(dayjs.tz.guess())
-  const [myTz, setMyTz] = useState(dayjs.tz.guess())
-  const [time, setTime] = useState(dayjs().tz(timezone).format('HH:mm:ss'))
-  const [date, setDate] = useState(
-    dayjs().tz(timezone).format('dddd, D MMM, YYYY')
-  )
   const [modal, showModal] = useState(false)
-  const timezones = Intl.supportedValuesOf('timeZone')
+  const [cities, setCities] = useState(data)
 
-  useEffect(() => {
-    document.title = timezone
-    setDate(dayjs().tz(timezone).format("dddd, D MMM, YYYY"))
-    const interval = setInterval(() => {
-      setTime(dayjs().tz(timezone).format('HH:mm:ss'))
-    }, 1000)
-    return () => clearInterval(interval)
-  }, [timezone])
-  
-  const customStyles = {
-    overlay: {
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      bottom: 0,
-      background: 'rgba(0,0,0,0.6)',
-    },
-    content: {
-      backgroundColor: 'black',
-      top: '50%',
-      left: '50%',
-      right: 'auto',
-      bottom: 'auto',
-      marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-    },
+  const addCity = (city) => {
+    setCities((prev) => [...prev, city])
   }
 
-  const handleTimezoneChange = (e) => {
-    const selectedTimezone = e.target.value
-
-    setMyTz(selectedTimezone)
-  }
-
-  const handleApply = () => {
-    const currentTime = dayjs().tz(timezone).format('HH:mm:ss')
-    const currentDate = dayjs().tz(timezone).format('dddd, D MMM, YYYY')
-    setTime(currentTime)
-    setDate(currentDate)
-    setTimezone(myTz)
-    setMyTz(myTz)
-    showModal(false)
-  }
-
-  const openModal = () => {
-    showModal(true)
-  }
-
-  const closeModal = () => {
-    showModal(false)
-    setMyTz(timezone)
-  }
+  const renderedCities = cities.map((city, i) => {
+    return <City key={i} city={city} curCity={curCity} />
+  })
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="-translate-x-2 px-4 text-right">
-        <p className="tracking-widest inline-block opacity-[0.6] text-right">
-          {timezone}
-        </p>
-        <button
-          onClick={openModal}
-          className="bg-transparent text-white inline-block opacity-[0.6] p-2 ml-2"
-        >
-          <FaEdit />
-        </button>
-
-        <p className="flex justify-center my-4 -mr-2">
-          <span
-            style={{ fontFamily: 'Courier Prime' }}
-            className="text-6xl md:text-9xl font-bold text-center"
-          >
-            {time}
-          </span>
-        </p>
-        <p>{date}</p>
-
-        <Modal
-          isOpen={modal}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="Timezone Modal"
-        >
-          <h2 className="opacity-60">Change Timezone</h2>
-          <select
-            onChange={handleTimezoneChange}
-            value={myTz}
-            className="px-4 py-2 bg-transparent w-40 rounded-md mr-3 hover:border hover:border-[#646cff] focus:border-[#646cff]"
-          >
-            {timezones.map((tz) => (
-              <option
-                key={tz}
-                value={tz}
-                style={{
-                  backgroundColor: '#222',
-                  color: '#fff',
-                }}
-              >
-                {tz}
-              </option>
-            ))}
-            ``
-          </select>
-          <button className="bg-transparent" onClick={handleApply}>
-            Apply
-          </button>
-          <FaWindowClose
-            className="bg-transparent p-0 cursor-pointer fixed top-6 right-6"
-            onClick={closeModal}
-          />
-        </Modal>
+    <section className="flex justify-center h-screen">
+      <div className="w-[400px] bg-blue-200 text-xl px-3 py-3">
+        <div className="flex justify-between">
+          <span className="text-sm underline">Edit</span>
+          <button onClick={() => showModal(true)}>+</button>
+        </div>
+        <div className="mb-4">
+          <p className="font-extrabold text-2xl">World Clock</p>
+        </div>
+        <div className="space-y-4 divide-y divide-black">{renderedCities}</div>
       </div>
-    </div>
+      <CityModal showModal={showModal} modal={modal} addCity={addCity} />
+    </section>
   )
 }
 
