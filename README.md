@@ -2,7 +2,7 @@
 Choose your timezone with ease🚀
 
 ## Demo
-![dayjstime PR #1](https://github.com/gurkiratz/dayjs-app/assets/94279121/2d953277-84c7-4152-805a-0cb1d04357c2)
+https://gurkiratz.github.io/dayjs-app/
 
 
 ## Inspiration
