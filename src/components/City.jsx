@@ -49,6 +49,7 @@ export default function City({ city, curCity }) {
     const minutesDiff = date2.diff(date1, 'm')
     let hours = Math.trunc(minutesDiff / 60)
     let remainingMinutes = Math.abs(minutesDiff % 60)
+    remainingMinutes = remainingMinutes === 0 ? '00' : remainingMinutes
     let finalDiff = `${hours}:${remainingMinutes}`
     finalDiff = minutesDiff === 0 ? '0HRS' : finalDiff
     finalDiff = hours >= 0 ? `+${finalDiff}` : finalDiff

@@ -28,7 +28,7 @@ function App() {
     <section className="flex justify-center h-screen">
       <div className="w-[400px] bg-blue-200 text-xl px-3 py-3">
         <div className="flex justify-between">
-          <span className="text-sm underline">Edit</span>
+          <span className="text-sm underline cursor-pointer">Edit</span>
           <button onClick={() => showModal(true)}>+</button>
         </div>
         <div className="mb-4">

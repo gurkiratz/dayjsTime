@@ -60,7 +60,7 @@ const CityList = ({ showModal, modal, addCity }) => {
           <p
             onClick={() => handleClick(tz)}
             key={tz}
-            className="py-2 text-white"
+            className="py-2 text-white cursor-pointer"
           >
             {tz}
           </p>
