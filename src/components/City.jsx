@@ -16,7 +16,7 @@ dayjs.extend(isYesterday)
 dayjs.extend(isTomorrow)
 dayjs.extend(customParseFormat)
 
-export default function City({ city, curCity }) {
+export default function City({ city, curCity, editMode, onDelete }) {
   const [time, setTime] = useState(dayjs().tz(city).format('h:mm'))
   const [ampm, setAmpm] = useState(dayjs().tz(city).format('A'))
   const [diff, setDiff] = useState()
@@ -64,9 +64,19 @@ export default function City({ city, curCity }) {
         </span>
         <p className="font-medium">{city.split('/')[1]}</p>
       </div>
-      <p className="text-3xl">
-        {time} <span className="text-sm">{ampm}</span>
-      </p>
+
+      {editMode ? (
+        <span
+          className="cursor-pointer text-3xl text-red-700"
+          onClick={() => onDelete(city)}
+        >
+          ␡
+        </span>
+      ) : (
+        <p className="text-3xl">
+          {time} <span className="text-sm">{ampm}</span>
+        </p>
+      )}
     </div>
   )
 }
