@@ -59,7 +59,7 @@ export default function City({ city, curCity, editMode, onDelete }) {
   return (
     <div className="flex items-center justify-between">
       <div>
-        <span className="text-sm">
+        <span className="text-sm text-zinc-400">
           {day}, {diff}
         </span>
         <p className="font-medium">{city.split('/')[1]}</p>
@@ -73,7 +73,7 @@ export default function City({ city, curCity, editMode, onDelete }) {
           ␡
         </span>
       ) : (
-        <p className="text-3xl">
+        <p className="text-3xl ">
           {time} <span className="text-sm">{ampm}</span>
         </p>
       )}

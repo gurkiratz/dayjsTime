@@ -45,10 +45,10 @@ function App() {
 
   return (
     <section className="flex justify-center h-screen">
-      <div className="w-[400px] bg-blue-200 text-xl px-3 py-3">
+      <div className="w-[400px] bg-zinc-900 text-gray-200 text-xl px-3 py-3">
         <div className="flex justify-between">
           <span
-            className="text-sm underline cursor-pointer"
+            className="text-sm underline cursor-pointer text-orange-400"
             onClick={toggleEdit}
           >
             {editMode ? 'Done' : 'Edit'}
@@ -58,6 +58,7 @@ function App() {
               showModal(true)
               setEditMode(false)
             }}
+            className="text-orange-400"
           >
             +
           </button>
@@ -65,7 +66,19 @@ function App() {
         <div className="mb-4">
           <p className="font-extrabold text-2xl">World Clock</p>
         </div>
-        <div className="space-y-4 divide-y divide-black">{renderedCities}</div>
+        <div className="space-y-4 divide-y divide-gray-400">
+          {renderedCities}
+        </div>
+        <p className="absolute left-0 right-0 text-center  bottom-0 text-sm text-zinc-400">
+          made with ♥️ by{' '}
+          <a
+            href="https://github.com/gurkiratz"
+            className="cursor-pointer underline"
+            target="_blank"
+          >
+            gurkirat
+          </a>
+        </p>
       </div>
       <CityModal showModal={showModal} modal={modal} addCity={addCity} />
     </section>
