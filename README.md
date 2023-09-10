@@ -1,4 +1,4 @@
-# Digital Clock w/ dayjs package
+# World Clock w/ dayjs package
 Choose your timezone with ease🚀
 
 ## Demo
