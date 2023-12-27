@@ -72,7 +72,7 @@ function App() {
         <p className="absolute left-0 right-0 text-center  bottom-0 text-sm text-zinc-400">
           made with ♥️ by{' '}
           <a
-            href="https://github.com/gurkiratz"
+            href="https://github.com/gurkiratz/dayjs-app"
             className="cursor-pointer underline"
             target="_blank"
           >
