@@ -2,7 +2,7 @@
 Choose your timezone with ease🚀
 
 ## Demo
-https://gurkiratz.github.io/dayjs-app/
+https://gurkiratz.github.io/ios-world-clock/
 
 
 ## Inspiration
